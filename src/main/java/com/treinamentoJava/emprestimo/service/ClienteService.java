@@ -56,28 +56,44 @@ public class ClienteService {
 		return this.clienteRepository.save(cliente);
 	}
 	
-	public Cliente alterarCliente(Long cpf, @Valid Cliente cliente) { //throws ClienteNaoEncontrado
-			
-			//if (this.clienteRepository.existsById(cpf)) {
-				//Cliente clienteASerAlterado = this.clienteRepository.findById(cpf).get();
+	public Cliente alterarCliente(Long cpf, @Valid Cliente cliente) throws ClienteNaoEncontrado
+	{ 
+			if (this.clienteRepository.existsById(cpf)) {
+				Cliente clienteASerAlterado = this.clienteRepository.findById(cpf).get();
 							
-				//cliente.setCpf(cpf);
+				cliente.setCpf(cpf);
 				
-		
 				
-				/*
+				
 			if (cliente.getNome() == null) {
-					cliente.setNome(clienteASerAlterado.getNome());
-					cliente.
-				}
+					cliente.setNome(clienteASerAlterado.getNome());					
+			}
 				
-				if (cliente.getTelefone() == null) {
+			if (cliente.getTelefone() == null) {
 					cliente.setTelefone(clienteASerAlterado.getTelefone());
-				}
-				*/
+			}
+			
+			if (cliente.getRendimentoMensal() == null) {
+				cliente.setRendimentoMensal(clienteASerAlterado.getRendimentoMensal());
+			}
+			
+			if (cliente.getRua() == null) {
+				cliente.setRua(clienteASerAlterado.getRua());
+			}
+			
+			if (cliente.getNumero() == null) {
+				cliente.setNumero(clienteASerAlterado.getNumero());
+			}
+			
+			if (cliente.getCep() == null) {
+				cliente.setCep(clienteASerAlterado.getCep());
+			}
+				
+			
+			
 				return this.clienteRepository.save(cliente);
-			//}
-			//throw new ClienteNaoEncontrado(cpf);	
+			}
+			throw new ClienteNaoEncontrado(cpf);	
 			
 	}
 	

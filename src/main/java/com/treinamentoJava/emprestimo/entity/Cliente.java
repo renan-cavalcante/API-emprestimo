@@ -25,49 +25,50 @@ public class Cliente {
 	@Id
 	private Long cpf;
 	
+	@NotBlank(message = "Nome nao pode ser nulo.")
+	private String nome;
+	private Long telefone;
+	@NotNull(message = "Rendimento nao pode ser nulo.")
+	private Double rendimentoMensal;
+	private String rua;
+	private Integer numero;
+	private Long cep;
+	
+	
+	private double valorTotalEmprestimo;
+	private int quantidadeDeEmprestimos;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "CPFCliente")
 	private List<Emprestimo> emprestimo = new ArrayList<>();
-	
-	@NotBlank(message = "Nome nao pode ser nulo.")
-	private String nome;
-	
-	@NotNull(message = "Rendimento nao pode ser nulo.")
-	private Double rendimentoMensal;
-	
-	private String rua;
-	private Long telefone;
-	private String numero;
-	private Long cep;
-	private double valorTotalEmprestimo;
-	private int quantidadeDeEmprestimos;
 	
 	public Cliente() {
 		
 	}
 
 
-	public Cliente(Long cpf, List<Emprestimo> emprestimo,  String nome, Double rendimentoMensal, String rua, Long telefone,
-			String numero, Long cep) {
+	public Cliente(Long cpf, List<Emprestimo> emprestimo,  String nome, Long telefone , Double rendimentoMensal, String rua,
+			Integer numero, Long cep) {
 		super();
 		this.cpf = cpf;
 		this.emprestimo = emprestimo;
 		this.nome = nome;
+		this.telefone = telefone;
 		this.rendimentoMensal = rendimentoMensal;
 		this.rua = rua;
-		this.telefone = telefone;
+		
 		this.numero = numero;
 		this.cep = cep;
 		
 	}
 	
-	public Cliente(String nome, Long cpf, Long telefone, Long cep, String numero, String rua, Double rendimentoMensal
+	public Cliente(Long cpf, String nome,   Long telefone,Double rendimentoMensal, String rua, Integer numero ,  Long cep
 			) {
 		super();
-		this.cpf = cpf;
 		this.nome = nome;
-		this.rua = rua;
+		this.cpf = cpf;
 		this.telefone = telefone;
+		this.rua = rua;
 		this.numero = numero;
 		this.cep = cep;
 		this.rendimentoMensal = rendimentoMensal;
@@ -127,11 +128,11 @@ public class Cliente {
 		this.rua = rua;
 	}
 
-	public String getNumero() {
+	public Integer getNumero() {
 		return numero;
 	}
 
-	public void setNumero(String numero) {
+	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
 
@@ -195,6 +196,7 @@ public class Cliente {
 		Cliente other = (Cliente) obj;
 		return Objects.equals(cpf, other.cpf);
 	}
+
 
 
 

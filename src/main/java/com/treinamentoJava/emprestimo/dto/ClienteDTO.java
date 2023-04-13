@@ -6,20 +6,21 @@ import java.util.List;
 import com.treinamentoJava.emprestimo.entity.Cliente;
 
 public class ClienteDTO {
-	private String nome;
 	private Long cpf;
+	private String nome;
 	private Long telefone;
-	private String rua;
-	private String numero;
-	private Long cep;
 	private Double rendimentoMensal;
+	private String rua;
+	private Integer numero;
+	private Long cep;
+	
 	
 	public ClienteDTO() {
 	}
 	
 	public static ClienteDTO retornaCliente(Cliente cliente){
-		ClienteDTO clienteDTO = new ClienteDTO(cliente.getNome(), cliente.getCpf(), 
-				cliente.getTelefone(),cliente.getNumero(), cliente.getRua(), cliente.getCep(), cliente.getRendimentoMensal());
+		ClienteDTO clienteDTO = new ClienteDTO(cliente.getCpf(), cliente.getNome(),  
+				cliente.getTelefone(), cliente.getRendimentoMensal(), cliente.getRua(), cliente.getNumero(), cliente.getCep());
 		return clienteDTO;
 	}
 	
@@ -28,8 +29,8 @@ public class ClienteDTO {
 		List<ClienteDTO> clienteDTO = new ArrayList<>();
 		
 		for(Cliente cliente : clientes) {
-			ClienteDTO DTO = new ClienteDTO(cliente.getNome(), cliente.getCpf(), 
-				cliente.getTelefone(),cliente.getNumero(), cliente.getRua(), cliente.getCep(), cliente.getRendimentoMensal());
+			ClienteDTO DTO = new ClienteDTO(cliente.getCpf(), cliente.getNome(),  
+					cliente.getTelefone(), cliente.getRendimentoMensal(), cliente.getRua(), cliente.getNumero(), cliente.getCep());
 			clienteDTO.add(DTO);
 		}
 		return clienteDTO;
@@ -39,14 +40,15 @@ public class ClienteDTO {
 	
 	public static Cliente retornaCliente(ClienteDTO clienteDTO){
 		
-		Cliente cliente = new Cliente(clienteDTO.getNome(), clienteDTO.getCpf(), clienteDTO.getTelefone(),
-				clienteDTO.getCep(),clienteDTO.getNumero(), clienteDTO.getRua(), clienteDTO.getRendimentoMensal());
+		Cliente cliente = new Cliente(clienteDTO.getCpf(),  clienteDTO.getNome(),  
+				clienteDTO.getTelefone(), clienteDTO.getRendimentoMensal(), clienteDTO.getRua(),
+				clienteDTO.getNumero(), clienteDTO.getCep());
 
 		return cliente;
 	}
 	
 
-	public ClienteDTO(String nome, Long cpf, Long telefone, String rua, String numero, Long cep, Double rendimentoMensal) {
+	public ClienteDTO(Long cpf, String nome,  Long telefone, Double rendimentoMensal, String rua, Integer numero, Long cep) {
 		super();
 		this.nome = nome;
 		this.cpf = cpf;
@@ -85,11 +87,11 @@ public class ClienteDTO {
 		this.rua = rua;
 	}
 
-	public String getNumero() {
+	public Integer getNumero() {
 		return numero;
 	}
 
-	public void setNumero(String numero) {
+	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
 

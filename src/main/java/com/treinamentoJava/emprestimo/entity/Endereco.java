@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Endereco {
@@ -15,6 +18,10 @@ public class Endereco {
 	private String rua;
 	private String numero;
 	private Long cep;
+	
+	@JsonIgnore
+	@OneToOne
+	private Cliente dono;
 
 	
 	//String rua, String numero, Long cep
@@ -47,6 +54,14 @@ public class Endereco {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Cliente getDono() {
+		return dono;
+	}
+
+	public void setDono(Cliente dono) {
+		this.dono = dono;
 	}
 
 	

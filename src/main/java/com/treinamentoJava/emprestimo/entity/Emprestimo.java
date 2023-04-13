@@ -31,21 +31,21 @@ public class Emprestimo {
 	private Double valorInicial;
 	private Double valorFinal;
 	private Relacionamento relacionamento;
-	private int dataInicial;
-	private int dataFinal;
+	private String dataFinal;
+	private String dataInicio;
 	
 	
 	
 	public Emprestimo() {
 	}
 	
-	public Emprestimo(Long id,Relacionamento relacionamento, Double valorInicial, Double valorFinal, 
-			 int dataInicial, int dataFinal) {
+	public Emprestimo(Long id,Relacionamento relacionamento, Double valorInicial, Double valorFinal, String dataInicio,
+			 String dataFinal) {
 		this.id = id;
 		this.valorInicial = valorInicial;
 		this.valorFinal = valorFinal;
 		this.relacionamento = relacionamento;
-		this.dataInicial = dataInicial;
+		
 		this.dataFinal = dataFinal;
 	}
 	
@@ -76,16 +76,15 @@ public class Emprestimo {
 	public void setRelacionamento(Relacionamento relacionamento) {
 		this.relacionamento = relacionamento;
 	}
-	public int getDataInicial() {
-		return dataInicial;
-	}
-	public void setDataInicial(int dataInicial) {
-		this.dataInicial = dataInicial;
-	}
-	public int getDataFinal() {
+
+	
+	public String getDataFinal() {
+		
 		return dataFinal;
+
 	}
-	public void setDataFinal(int dataFinal) {
+	public void setDataFinal(String dataFinal)  {
+		
 		this.dataFinal = dataFinal;
 	}
 	public Long getId() {
@@ -93,6 +92,14 @@ public class Emprestimo {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getDataInicio() {
+		return dataInicio;
+	}
+
+	public void setDataInicio(String dataInicio) {
+		this.dataInicio = dataInicio;
 	}
 
 

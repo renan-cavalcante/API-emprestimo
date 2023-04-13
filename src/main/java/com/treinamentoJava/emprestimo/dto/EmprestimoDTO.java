@@ -11,8 +11,8 @@ public class EmprestimoDTO {
 	private Double valorInicial;
 	private Double valorFinal;
 	private Relacionamento relacionamento;
-	private int dataInicial;
-	private int dataFinal;
+	private String dataInicial;
+	private String dataFinal;
 	
 	
 	public EmprestimoDTO() {
@@ -20,7 +20,7 @@ public class EmprestimoDTO {
 	
 	public static EmprestimoDTO retornaEmprestimo(Emprestimo emprestimo){
 		EmprestimoDTO emprestimoDTO = new EmprestimoDTO(emprestimo.getId(), emprestimo.getRelacionamento(), 
-				emprestimo.getValorInicial(),emprestimo.getValorFinal(), emprestimo.getDataInicial(),
+				emprestimo.getValorInicial(),emprestimo.getValorFinal(), emprestimo.getDataInicio(),
 				emprestimo.getDataFinal());
 		return emprestimoDTO;
 	}
@@ -31,7 +31,7 @@ public class EmprestimoDTO {
 		
 		for(Emprestimo emprestimo : emprestimos) {
 			EmprestimoDTO DTO = new EmprestimoDTO(emprestimo.getId(), emprestimo.getRelacionamento(), 
-					emprestimo.getValorInicial(),emprestimo.getValorFinal(), emprestimo.getDataInicial(),
+					emprestimo.getValorInicial(),emprestimo.getValorFinal(), emprestimo.getDataInicio(),
 					emprestimo.getDataFinal());
 			emprestimoDTO.add(DTO);
 		}
@@ -55,7 +55,7 @@ public class EmprestimoDTO {
 
 
 	public EmprestimoDTO( Long id, Relacionamento relacionamento, Double valorInicial, Double valorFinal,
-			int dataInicial, int dataFinal) {
+			String dataInicial, String dataFinal) {
 		this.id = id;
 		this.relacionamento = relacionamento;
 		this.valorInicial = valorInicial;
@@ -98,19 +98,19 @@ public class EmprestimoDTO {
 		this.relacionamento = relacionamento;
 	}
 
-	public int getDataInicial() {
+	public String getDataInicial() {
 		return dataInicial;
 	}
 
-	public void setDataInicial(int dataInicial) {
+	public void setDataInicial(String dataInicial) {
 		this.dataInicial = dataInicial;
 	}
 
-	public int getDataFinal() {
+	public String getDataFinal() {
 		return dataFinal;
 	}
 
-	public void setDataFinal(int dataFinal) {
+	public void setDataFinal(String dataFinal) {
 		this.dataFinal = dataFinal;
 	}
 	

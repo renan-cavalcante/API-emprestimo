@@ -120,28 +120,41 @@ public class EmprestimoService {
 
 
 
-	public Emprestimo alterarEmprestimo(Long id, @Valid Emprestimo emprestimo) { //throws EmprestimoNaoEncontrado
+	public Emprestimo alterarEmprestimo(Long id, @Valid Emprestimo emprestimo) throws ClienteNaoEncontrado { 
 			
-			//if (this.emprestimoRepository.existsById(id)) {
-				//Emprestimo emprestimoASerAlterado = this.emprestimoRepository.findById(id).get();
+			if (this.emprestimoRepository.existsById(id)) {
+				Emprestimo emprestimoASerAlterado = this.emprestimoRepository.findById(id).get();
 							
-				//emprestimo.setCpf(id);
+				emprestimo.setId(id);
 				
 		
 				
-				/*
-			if (emprestimo.getNome() == null) {
-					emprestimo.setNome(emprestimoASerAlterado.getNome());
-					emprestimo.
+				
+			if (emprestimo.getValorInicial() == null) {
+					emprestimo.setValorInicial(emprestimoASerAlterado.getValorInicial());
+					
 				}
 				
-				if (emprestimo.getTelefone() == null) {
-					emprestimo.setTelefone(emprestimoASerAlterado.getTelefone());
+			if (emprestimo.getValorInicial() != null) {
+				Cliente cliente = retornarCliente(emprestimoASerAlterado.getCPFCliente().getCpf());
+				if(concederEmprestimo(emprestimo, cliente.getCep())){
+						
+					emprestimo.setValorFinal(cliente.getQuantidadeDeEmprestimos());
+						
 				}
-				*/
+			}
+			
+			if(emprestimo.getRelacionamento() == null) {
+				emprestimo.setRelacionamento(emprestimoASerAlterado.getRelacionamento());
+			}
+			
+			if(emprestimo.getDataInicio() == null) {
+				emprestimo.setDataInicio(emprestimoASerAlterado.getDataInicio());
+			}
+				
 				return this.emprestimoRepository.save(emprestimo);
-			//}
-			//throw new EmprestimoNaoEncontrado(id);	
+			}
+			throw new ClienteNaoEncontrado(id);	
 			
 	}
 	
