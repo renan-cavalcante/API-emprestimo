@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import com.treinamentoJava.emprestimo.entity.Cliente;
 import com.treinamentoJava.emprestimo.entity.Emprestimo;
 import com.treinamentoJava.emprestimo.exception.ClienteNaoEncontrado;
+import com.treinamentoJava.emprestimo.exception.EmprestimoNaoEncontrado;
 import com.treinamentoJava.emprestimo.repository.ClienteRepository;
 import com.treinamentoJava.emprestimo.repository.EmprestimoRepository;
 
@@ -41,7 +42,7 @@ public class EmprestimoService {
 	
 	
 	// busca o cliente pelo cpf no serviceCliente
-	protected Cliente retornarCliente(Long cpf) throws ClienteNaoEncontrado {
+	protected Cliente retornarCliente(Long cpf) throws  ClienteNaoEncontrado {
 		Cliente cliente = retornarClienteService().retornaCliente(cpf);
 		return cliente;
 	}
@@ -59,17 +60,17 @@ public class EmprestimoService {
 		return retornarCliente(cpf).getEmprestimo();
 	}
 	
-	public Emprestimo retornaEmprestimo(Long id) throws ClienteNaoEncontrado {
+	public Emprestimo retornaEmprestimo(Long id) throws EmprestimoNaoEncontrado {
 		if (this.emprestimoRepository.existsById(id)) {
 			return this.emprestimoRepository.findById(id).get();
 		}
-		 throw new ClienteNaoEncontrado(id);
+		 throw new EmprestimoNaoEncontrado(id);
 		
 	}
 	
 	
 	
-	public MensagemDeSucesso cadastrarEmprestimo(Emprestimo emprestimo, Long cpf) throws ClienteNaoEncontrado{
+	public MensagemDeSucesso cadastrarEmprestimo(Emprestimo emprestimo, Long cpf) throws EmprestimoNaoEncontrado, ClienteNaoEncontrado{
 		
 		MensagemDeSucesso mensagem = new MensagemDeSucesso();
 		Cliente cliente = retornarCliente(cpf);
@@ -96,7 +97,7 @@ public class EmprestimoService {
 	
 	
 	//verifica se cliente pode ter emprestimo, com base no rendimento mensal, o valor solicitado e o quanto tem de emprestimo
-	public boolean concederEmprestimo(Emprestimo emprestimo, Long cpf) throws ClienteNaoEncontrado {  
+	public boolean concederEmprestimo(Emprestimo emprestimo, Long cpf) throws EmprestimoNaoEncontrado, ClienteNaoEncontrado {  
 		Cliente cliente = retornarCliente(cpf);
 		Double valorInicial = emprestimo.getValorInicial();
 		
@@ -120,7 +121,7 @@ public class EmprestimoService {
 
 
 
-	public Emprestimo alterarEmprestimo(Long id, @Valid Emprestimo emprestimo) throws ClienteNaoEncontrado { 
+	public Emprestimo alterarEmprestimo(Long id, @Valid Emprestimo emprestimo) throws EmprestimoNaoEncontrado, ClienteNaoEncontrado { 
 			
 			if (this.emprestimoRepository.existsById(id)) {
 				Emprestimo emprestimoASerAlterado = this.emprestimoRepository.findById(id).get();
@@ -154,11 +155,11 @@ public class EmprestimoService {
 				
 				return this.emprestimoRepository.save(emprestimo);
 			}
-			throw new ClienteNaoEncontrado(id);	
+			throw new EmprestimoNaoEncontrado(id);	
 			
 	}
 	
-	public MensagemDeSucesso deletarEmprestimo(Long id) throws ClienteNaoEncontrado {
+	public MensagemDeSucesso deletarEmprestimo(Long id) throws EmprestimoNaoEncontrado {
 			
 		if (this.emprestimoRepository.existsById(id)) {
 			this.emprestimoRepository.deleteById(id);
@@ -167,7 +168,7 @@ public class EmprestimoService {
 			return mensagem;
 				
 		} 
-		throw new ClienteNaoEncontrado(id);
+		throw new EmprestimoNaoEncontrado(id);
 	}
 
 	

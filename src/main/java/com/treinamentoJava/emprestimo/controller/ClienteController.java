@@ -1,7 +1,5 @@
 package com.treinamentoJava.emprestimo.controller;
 
-// excessão para criação de cliente
-// endereco como objeto
 
 import java.util.List;
 
